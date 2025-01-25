@@ -41,7 +41,7 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
           </Button>
           <Link to="/auth">
             <Button>
-              <Mail className="mr-2 h-4 w-4" /> Sign In
+              <Mail className="h-4 w-4" /> Sign In
             </Button>
           </Link>
         </div>

@@ -15,7 +15,7 @@ export function AuthNavBar() {
         <div className="flex items-center space-x-3">
           <Link to="/">
             <Button>
-              <House className="mr-2 h-4 w-4" />
+              <House className="h-4 w-4" />
               Home
             </Button>
           </Link>
