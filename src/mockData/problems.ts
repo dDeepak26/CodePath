@@ -1,5 +1,5 @@
 export type Problem = {
-  id: string;
+  id: number;
   title: string;
   difficulty: string;
   category: string;
@@ -9,7 +9,7 @@ export type Problem = {
 
 export const problems: Problem[] = [
   {
-    id: "two-sum",
+    id: 1,
     title: "Two Sum",
     difficulty: "Easy",
     category: "Array",
@@ -17,7 +17,7 @@ export const problems: Problem[] = [
     videoId: "UXDSeD9mN-k?si=IdCi5ZQU4i7uCzG5",
   },
   {
-    id: "reverse-linked-list",
+    id: 2,
     title: "Reverse Linked List",
     difficulty: "Hard",
     category: "Linked List",
@@ -25,7 +25,7 @@ export const problems: Problem[] = [
     videoId: "D2vI2DNJGd8?si=53VudtLwqNQ5SeiU",
   },
   {
-    id: "jump-game",
+    id: 3,
     title: "Jump Game",
     difficulty: "Medium",
     category: "Dynamic Programming",
@@ -33,7 +33,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "valid-parentheses",
+    id: 4,
     title: "Valid Parentheses",
     difficulty: "Easy",
     category: "Stack",
@@ -41,7 +41,7 @@ export const problems: Problem[] = [
     videoId: "xwjS0iZhw4I?si=M39dqLXGLWOOfInj",
   },
   {
-    id: "search-a-2d-matrix",
+    id: 5,
     title: "Search a 2D Matrix",
     difficulty: "Medium",
     category: "Binary Search",
@@ -49,7 +49,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "container-with-most-water",
+    id: 6,
     title: "Container With Most Water",
     difficulty: "Medium",
     category: "Two Pointers",
@@ -57,7 +57,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "merge-intervals",
+    id: 7,
     title: "Merge Intervals",
     difficulty: "Medium",
     category: "intervals",
@@ -65,7 +65,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "maximum-depth-of-binary-tree",
+    id: 8,
     title: "Maximum Depth of Binary Tree",
     difficulty: "Easy",
     category: "Tree",
@@ -73,7 +73,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "best-time-to-buy-and-sell-stock",
+    id: 9,
     title: "Best Time to Buy and Sell Stock",
     difficulty: "Easy",
     category: "Array",
@@ -81,7 +81,7 @@ export const problems: Problem[] = [
     videoId: "",
   },
   {
-    id: "subsets",
+    id: 10,
     title: "Subsets",
     difficulty: "Medium",
     category: "Backtracking",

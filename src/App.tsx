@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./Pages/Home";
-import NotFoundPage from "./Pages/NoPage";
-import Auth from "./Pages/Auth";
-import CodePath from "./Pages/CodePath";
 import { useUser } from "@clerk/clerk-react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Auth from "./Pages/Auth";
+import Home from "./Pages/Home";
+import CodePath from "./Pages/CodePath";
+import ProblemPage from "./Pages/CodePath/ProblemPage";
+import NotFoundPage from "./Pages/NoPage";
 
 function App() {
   const { isSignedIn } = useUser();
@@ -17,6 +18,7 @@ function App() {
         />
         <Route path="auth" element={<Auth />} />
         <Route path="codepath" element={<CodePath />} />
+        <Route path="/codepath/problem/:pageid" element={<ProblemPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

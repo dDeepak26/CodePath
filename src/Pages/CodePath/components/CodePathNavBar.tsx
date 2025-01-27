@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { UserButton, useUser } from "@clerk/clerk-react";
+import { useAppSelector } from "@/hooks/hooks";
+import { useUser } from "@clerk/clerk-react";
 
 interface CodePathNavBarProps {
   togglePage: () => void;
@@ -7,6 +8,14 @@ interface CodePathNavBarProps {
 
 const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
   const { user } = useUser();
+
+  // Get currentPage state from Redux
+  const currentPage = useAppSelector((state) => state.page.currentPage);
+
+  // Set the button text based on the currentPage
+  const buttonText =
+    currentPage === "ProblemListPage" ? "Profile" : "Problem List";
+
   return (
     <div className="p-5 border-b border-gray-300 shadow-sm bg-white sticky top-0 z-10">
       <div className="container mx-auto flex flex-wrap items-center justify-between">
@@ -19,15 +28,20 @@ const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
         </div>
         {/* navigation buttons */}
         <div className="flex items-center space-x-3">
-          <Button variant={"secondary"} onClick={togglePage}>
-            <img
-              src={user?.imageUrl}
-              alt="No Profile Image"
-              className="h-6 w-6 rounded-lg"
-            />
-            Profile
+          <Button variant={"default"} onClick={togglePage}>
+            {buttonText === "Profile" ? (
+              <>
+                <img
+                  src={user?.imageUrl}
+                  alt="No Profile Image"
+                  className="h-6 w-6 rounded-lg border-white mr-2"
+                />
+                {buttonText}
+              </>
+            ) : (
+              buttonText
+            )}
           </Button>
-          <UserButton />
         </div>
       </div>
     </div>

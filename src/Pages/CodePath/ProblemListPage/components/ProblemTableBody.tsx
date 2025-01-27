@@ -1,15 +1,26 @@
 import { problems } from "@/mockData/problems";
 import { CircleCheckBig, Youtube } from "lucide-react";
+import Modal from "./Modal";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { closeModal, openModal } from "@/utils/modalSlice";
+import { Link } from "react-router-dom";
 
 const ProblemTable = () => {
-  const handleYoutubeClick = (videoId: string) => {
+  const dispatch = useAppDispatch();
+  const { isOpen, videoUrl } = useAppSelector((state) => state.modal);
+
+  const handleYoutubeClick = (videoId: any) => {
     if (videoId) {
-      window.open(`https://youtu.be/${videoId}`, "_blank");
+      dispatch(openModal(`https://www.youtube.com/embed/${videoId}`));
     }
   };
 
+  const closeModalHandler = () => {
+    dispatch(closeModal());
+  };
+
   return (
-    <tbody className="text-gray-900 text-center">
+    <tbody className="text-gray-900">
       {problems.map((doc, id) => {
         const difficultyColor =
           doc?.difficulty === "Easy"
@@ -30,13 +41,13 @@ const ProblemTable = () => {
             </th>
 
             {/* Problem Title */}
-            <td className="px-6 py-4">
-              <a
+            <td className="px-6 py-4 text-left">
+              <Link
                 className="hover:text-blue-600 cursor-pointer"
-                href={`/codepath/problem/${doc?.id}`}
+                to={`/codepath/problem/${doc?.id}`}
               >
-                {doc?.title}
-              </a>
+                {`${doc?.id}. ${doc?.title}`}
+              </Link>
             </td>
 
             {/* Difficulty */}
@@ -61,6 +72,8 @@ const ProblemTable = () => {
           </tr>
         );
       })}
+      {/* Modal to show yt video */}
+      <Modal isOpen={isOpen} onClose={closeModalHandler} videoUrl={videoUrl} />
     </tbody>
   );
 };
