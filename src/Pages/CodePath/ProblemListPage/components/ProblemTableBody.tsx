@@ -1,4 +1,4 @@
-import { problems } from "@/mockData/problems";
+import { problems } from "@/Data/problems";
 import { CircleCheckBig, Youtube } from "lucide-react";
 import Modal from "./Modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";

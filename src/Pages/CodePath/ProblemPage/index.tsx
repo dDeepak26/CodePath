@@ -2,6 +2,7 @@ import { useUser } from "@clerk/clerk-react";
 import AuthRedirect from "@/components/AuthRedirect";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import ProblemPageNavBar from "./components/ProblemPageNavBar";
+import WorkSpace from "./components/WorkSpace";
 
 const ProblemPage = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -17,17 +18,10 @@ const ProblemPage = () => {
   }
 
   return (
-    <div className="h-screen">
+    <div>
       <ProblemPageNavBar />
-      <div className="flex flex-col justify-center items-center h-full">
-        <div>
-          <h1 className="text-center text-2xl">Problem Page</h1>
-        </div>
-        <div className="flex w-full h-full">
-          <div className="bg-gray-50 flex-1 h-full">1</div>
-          <div className="bg-gray-100 flex-1 h-full">2</div>
-        </div>
-      </div>
+      {/* split screen component for problem description and code editor */}
+      <WorkSpace />
     </div>
   );
 };

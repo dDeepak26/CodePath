@@ -18,7 +18,7 @@ function App() {
         />
         <Route path="auth" element={<Auth />} />
         <Route path="codepath" element={<CodePath />} />
-        <Route path="/codepath/problem/:pageid" element={<ProblemPage />} />
+        <Route path="/codepath/problem/:pageId" element={<ProblemPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

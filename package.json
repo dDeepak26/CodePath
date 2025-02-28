@@ -16,6 +16,10 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.1",
     "@reduxjs/toolkit": "^2.5.0",
+    "@uiw/codemirror-extensions-langs": "^4.23.9",
+    "@uiw/codemirror-themes-all": "^4.23.9",
+    "@uiw/react-codemirror": "^4.23.9",
+    "assert": "^2.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^11.2.0",
@@ -26,6 +30,7 @@
     "react-dom": "^18.3.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.28.0",
+    "react-split": "^2.0.14",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },
