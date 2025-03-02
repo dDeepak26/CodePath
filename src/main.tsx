@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { Provider } from "react-redux";
-import store from "./utils/store.ts";
+import store from "./utils/redux/store.ts";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

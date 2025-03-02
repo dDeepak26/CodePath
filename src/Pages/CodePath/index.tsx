@@ -1,7 +1,7 @@
 import React from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { togglePage } from "../../utils/pageSlice";
+import { togglePage } from "../../utils/redux/pageSlice";
 import AuthRedirect from "@/components/AuthRedirect";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import CodePathNavBar from "./components/CodePathNavBar";

@@ -1,5 +1,5 @@
-import assert from "assert";
-import { ProblemType } from "./problemType";
+import { ProblemType } from "../types/problemType";
+import { expect } from "chai";
 import example1 from "./images/search-a-2d-1.jpg";
 import example2 from "./images/search-a-2d-2.jpg";
 
@@ -26,7 +26,7 @@ export const search2DMatrixHandler = (fn: any) => {
     const answers = [true, false];
     for (let i = 0; i < tests.length; i++) {
       const result = fn(tests[i].matrix, tests[i].target);
-      assert.deepEqual(result, answers[i]);
+      expect(result).to.deep.equal(answers[i]);
     }
     return true;
   } catch (error: any) {

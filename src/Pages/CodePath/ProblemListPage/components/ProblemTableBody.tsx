@@ -2,8 +2,10 @@ import { problems } from "@/Data/problems";
 import { CircleCheckBig, Youtube } from "lucide-react";
 import Modal from "./Modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { closeModal, openModal } from "@/utils/modalSlice";
+import { closeModal, openModal } from "@/utils/redux/modalSlice";
 import { Link } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/utils/firebase/firebase";
 
 const ProblemTable = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +20,23 @@ const ProblemTable = () => {
   const closeModalHandler = () => {
     dispatch(closeModal());
   };
+
+  // const getData = async () => {
+  //   try {
+  //     const docRef = doc(db, "problems", "0"); // Ensure "0" exists as a string
+  //     const docSnap = await getDoc(docRef);
+  //     const problemDataF = docSnap.data();
+  //     console.log("Document Data:", problemDataF);
+  //     console.log(problemDataF?.title);
+  //     console.log(problemDataF?.examples);
+  //     console.log(problemDataF?.constraints);
+  //     console.log(problemDataF?.handlerFunction);
+  //   } catch (error) {
+  //     console.error("Error fetching document:", error);
+  //   }
+  // };
+
+  // getData();
 
   return (
     <tbody className="text-gray-900">
@@ -44,9 +63,9 @@ const ProblemTable = () => {
             <td className="px-6 py-4 text-left">
               <Link
                 className="hover:text-blue-600 cursor-pointer"
-                to={`/codepath/problem/${doc?.id}`}
+                to={`/codepath/problem/${doc?.pageId}`}
               >
-                {`${doc?.id}. ${doc?.title}`}
+                {`${doc?.id + 1}. ${doc?.title}`}
               </Link>
             </td>
 

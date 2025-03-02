@@ -1,6 +1,6 @@
-import assert from "assert";
-import { ProblemType } from "./problemType";
-import example from "./images/reverseLL.jpeg";
+import { ProblemType } from "../types/problemType";
+import example from "./images/reverseLL.jpg";
+import { expect } from "chai";
 
 // JS doesn't have a built in LinkedList class, so we'll create one
 class LinkedList {
@@ -32,7 +32,7 @@ export const reverseLinkedListHandler = (fn: any) => {
     for (let i = 0; i < tests.length; i++) {
       const list = createLinkedList(tests[i]);
       const result = fn(list);
-      assert.deepEqual(getListValues(result), answers[i]);
+      expect(result).to.deep.equal(answers[i]);
     }
     return true;
   } catch (error: any) {

@@ -1,11 +1,19 @@
+import { useState } from "react";
 import Split from "react-split";
-import PlaygroundNavBar from "./PlaygroundNavBar";
 import CodeMirror from "@uiw/react-codemirror";
 import * as themes from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
+import { Problem } from "@/Data/problems";
+import PlaygroundNavBar from "./PlaygroundNavBar";
 import EditorFooter from "./EditorFooter";
 
-const Playground = () => {
+const Playground = ({
+  currentProblemData,
+}: {
+  currentProblemData: Problem;
+}) => {
+  const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+
   return (
     <div className="flex flex-col relative">
       <PlaygroundNavBar />
@@ -18,7 +26,7 @@ const Playground = () => {
         {/* split for ide */}
         <div className="w-full overflow-auto">
           <CodeMirror
-            value="console.log('Hello');"
+            value={currentProblemData?.starterCode}
             theme={themes.xcodeLight}
             extensions={[langs.javascript()]}
             style={{ fontSize: 16 }}
@@ -36,38 +44,38 @@ const Playground = () => {
           </div>
 
           <div className="flex">
-            {/* case 1 */}
-            <div className="mr-2 items-start mt-2 ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div className="font-medium items-center transition-all focus:outline-none inline-flex bg-gray-300 hover:bg-gray-400 relative rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap">
-                  Case 1
+            {/* Test case heading */}
+            {currentProblemData?.examples.map((currentProblemExampleData) => (
+              <div
+                className="mr-2 items-start mt-2 "
+                key={currentProblemExampleData?.id}
+                onClick={() =>
+                  setActiveTestCaseId(currentProblemExampleData?.id)
+                }
+              >
+                <div className="flex flex-wrap items-center gap-y-4">
+                  <div
+                    className={`font-medium items-center transition-all focus:outline-none inline-flex bg-gray-300 relative rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap ${
+                      activeTestCaseId === currentProblemExampleData?.id
+                        ? "text-black"
+                        : "text-gray-400"
+                    }`}
+                  >
+                    Case {currentProblemExampleData.id + 1}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="mr-2 items-start mt-2 ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div className="font-medium items-center transition-all focus:outline-none inline-flex bg-gray-300 hover:bg-gray-400 relative rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap">
-                  Case 2
-                </div>
-              </div>
-            </div>
-            <div className="mr-2 items-start mt-2 ">
-              <div className="flex flex-wrap items-center gap-y-4">
-                <div className="font-medium items-center transition-all focus:outline-none inline-flex bg-gray-300 hover:bg-gray-400 relative rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap">
-                  Case 3
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-          {/* input output */}
+          {/* Test case input output */}
           <div className="font-semibold my-4">
             <p className="text-sm font-medium mt-4">Input:</p>
             <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-gray-300 border-transparent mt-2">
-              nums = [2,7,11,15], target = 9
+              {currentProblemData.examples[activeTestCaseId].inputText}
             </div>
             <p className="text-sm font-medium mt-4">Output:</p>
             <div className="w-full cursor-text rounded-lg border px-3 py-[10px] bg-gray-300 border-transparent mt-2">
-              [0,1]
+              {currentProblemData.examples[activeTestCaseId].outputText}
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
-import assert from "assert";
-import { ProblemType } from "./problemType";
+import { expect } from "chai";
+import { ProblemType } from "../types/problemType";
 
 const starterCodeTwoSum = `function twoSum(nums,target){
   // Write your code here
@@ -26,7 +26,7 @@ const handlerTwoSum = (fn: any) => {
     for (let i = 0; i < nums.length; i++) {
       // result is the output of the user's function and answer is the expected output
       const result = fn(nums[i], targets[i]);
-      assert.deepStrictEqual(result, answers[i]);
+      expect(result).to.deep.equal(answers[i]);
     }
     return true;
   } catch (error: any) {

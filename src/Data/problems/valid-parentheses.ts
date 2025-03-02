@@ -1,5 +1,5 @@
-import assert from "assert";
-import { ProblemType } from "./problemType";
+import { ProblemType } from "../types/problemType";
+import { expect } from "chai";
 
 export const validParenthesesHandler = (fn: any) => {
   try {
@@ -7,7 +7,7 @@ export const validParenthesesHandler = (fn: any) => {
     const answers = [true, true, false, false, true];
     for (let i = 0; i < tests.length; i++) {
       const result = fn(tests[i]);
-      assert.deepEqual(result, answers[i]);
+      expect(result).to.deep.equal(answers[i]);
     }
     return true;
   } catch (error: any) {

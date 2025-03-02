@@ -1,5 +1,5 @@
-import assert from "assert";
-import { ProblemType } from "./problemType";
+import { ProblemType } from "../types/problemType";
+import { expect } from "chai";
 
 export const jumpGameHandler = (fn: any) => {
   try {
@@ -12,7 +12,7 @@ export const jumpGameHandler = (fn: any) => {
     const answers = [true, false, true, true];
     for (let i = 0; i < tests.length; i++) {
       const result = fn(tests[i]);
-      assert.equal(result, answers[i]);
+      expect(result).to.deep.equal(answers[i]);
     }
     return true;
   } catch (error: any) {
