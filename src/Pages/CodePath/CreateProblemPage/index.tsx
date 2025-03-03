@@ -4,7 +4,8 @@ import * as Yup from "yup";
 import { Problem } from "@/Data/problems";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase/firebase";
-import { toast, Bounce, ToastContainer } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
+import useProblemDataFB from "@/hooks/useProblemDataFB";
 
 // Validation schema
 const ProblemSchema = Yup.object().shape({
@@ -57,12 +58,17 @@ const initialValues: Problem = {
 };
 
 const ProblemForm: React.FC = () => {
+  // to get the problem from firebase
+  const problemData = useProblemDataFB();
+
   // to add problem to firebase db
   const addProblemToFirebase = async (values: Problem) => {
     console.log(values);
     const documentId = values.pageId;
+    const problemDataId = problemData.length;
+    const newValue = { ...values, id: problemDataId };
     try {
-      await setDoc(doc(db, "problems", documentId), values);
+      await setDoc(doc(db, "problems", documentId), newValue);
       toast.success("Problem successfully added to Firebase! 🎉", {
         position: "bottom-right",
         autoClose: 3000,
@@ -95,8 +101,8 @@ const ProblemForm: React.FC = () => {
             addProblemToFirebase(values);
             setTimeout(() => {
               actions.setSubmitting(false);
-              actions.resetForm();
             }, 5000);
+            actions.resetForm();
           }}
         >
           {({ values, errors, touched, isSubmitting }) => (
@@ -461,7 +467,6 @@ const ProblemForm: React.FC = () => {
           )}
         </Formik>
       </div>
-      <ToastContainer />
     </div>
   );
 };

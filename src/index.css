@@ -93,3 +93,13 @@
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=");
   cursor: row-resize;
 }
+
+code {
+  font-family: "Fira Code", monospace;
+  background-color: rgb(205, 193, 174);
+  color: black;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-size: 14px;
+  display: inline-block;
+}

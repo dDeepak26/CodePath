@@ -6,27 +6,31 @@ import CodePath from "./Pages/CodePath";
 import ProblemPage from "./Pages/CodePath/ProblemPage";
 import CreateProblemPage from "./Pages/CodePath/CreateProblemPage";
 import NotFoundPage from "./Pages/NoPage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { isSignedIn } = useUser();
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          index
-          path="/"
-          element={isSignedIn ? <Navigate to="codepath" /> : <Home />}
-        />
-        <Route path="auth" element={<Auth />} />
-        <Route path="codepath" element={<CodePath />} />
-        <Route path="/codepath/problem/:pageId" element={<ProblemPage />} />
-        <Route
-          path="/codepath/create-problem"
-          element={<CreateProblemPage />}
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            index
+            path="/"
+            element={isSignedIn ? <Navigate to="codepath" /> : <Home />}
+          />
+          <Route path="auth" element={<Auth />} />
+          <Route path="codepath" element={<CodePath />} />
+          <Route path="/codepath/problem/:pageId" element={<ProblemPage />} />
+          <Route
+            path="/codepath/create-problem"
+            element={<CreateProblemPage />}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

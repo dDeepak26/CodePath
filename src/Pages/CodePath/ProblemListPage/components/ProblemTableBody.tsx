@@ -1,11 +1,9 @@
-import { problems } from "@/Data/problems";
-import { CircleCheckBig, Youtube } from "lucide-react";
-import Modal from "./Modal";
-import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { closeModal, openModal } from "@/utils/redux/modalSlice";
 import { Link } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/utils/firebase/firebase";
+import { closeModal, openModal } from "@/utils/redux/modalSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import Modal from "./Modal";
+import { CircleCheckBig, Youtube } from "lucide-react";
+import useProblemDataFB from "@/hooks/useProblemDataFB";
 
 const ProblemTable = () => {
   const dispatch = useAppDispatch();
@@ -21,22 +19,10 @@ const ProblemTable = () => {
     dispatch(closeModal());
   };
 
-  // const getData = async () => {
-  //   try {
-  //     const docRef = doc(db, "problems", "0"); // Ensure "0" exists as a string
-  //     const docSnap = await getDoc(docRef);
-  //     const problemDataF = docSnap.data();
-  //     console.log("Document Data:", problemDataF);
-  //     console.log(problemDataF?.title);
-  //     console.log(problemDataF?.examples);
-  //     console.log(problemDataF?.constraints);
-  //     console.log(problemDataF?.handlerFunction);
-  //   } catch (error) {
-  //     console.error("Error fetching document:", error);
-  //   }
-  // };
-
-  // getData();
+  // Fetch problems and sort by order
+  const problems = useProblemDataFB()
+    ?.slice()
+    .sort((a, b) => a.order - b.order);
 
   return (
     <tbody className="text-gray-900">
@@ -47,6 +33,7 @@ const ProblemTable = () => {
             : doc?.difficulty === "Medium"
             ? "text-yellow-600"
             : "text-red-600";
+
         return (
           <tr
             key={doc?.id}
@@ -65,7 +52,7 @@ const ProblemTable = () => {
                 className="hover:text-blue-600 cursor-pointer"
                 to={`/codepath/problem/${doc?.pageId}`}
               >
-                {`${doc?.id + 1}. ${doc?.title}`}
+                {`${doc?.order}. ${doc?.title}`}
               </Link>
             </td>
 
@@ -91,7 +78,7 @@ const ProblemTable = () => {
           </tr>
         );
       })}
-      {/* Modal to show yt video */}
+      {/* Modal to show YouTube video */}
       <Modal isOpen={isOpen} onClose={closeModalHandler} videoUrl={videoUrl} />
     </tbody>
   );
