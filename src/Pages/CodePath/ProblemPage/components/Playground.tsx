@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import * as themes from "@uiw/codemirror-themes-all";
@@ -6,6 +6,8 @@ import { langs } from "@uiw/codemirror-extensions-langs";
 import { Problem } from "@/Data/problems";
 import PlaygroundNavBar from "./PlaygroundNavBar";
 import EditorFooter from "./EditorFooter";
+import { db } from "@/utils/firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const Playground = ({
   currentProblemData,
@@ -13,6 +15,30 @@ const Playground = ({
   currentProblemData: Problem;
 }) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+  const [currentProblemDataTest, setCurrentProblemDataTest] =
+    useState<Problem>();
+
+  useEffect(() => {
+    getData();
+  }, [currentProblemData]);
+
+  const getData = async () => {
+    try {
+      const docRef = doc(db, "problems", "0");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const problemDataF = docSnap.data() as Problem;
+        console.log("Fetched Problem Data:", problemDataF);
+        console.log(problemDataF.starterCode);
+        setCurrentProblemDataTest(problemDataF);
+      } else {
+        console.error("No such document exists!");
+      }
+    } catch (error) {
+      console.error("Error fetching document:", error);
+    }
+  };
 
   return (
     <div className="flex flex-col relative">

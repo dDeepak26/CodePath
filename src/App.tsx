@@ -4,6 +4,7 @@ import Auth from "./Pages/Auth";
 import Home from "./Pages/Home";
 import CodePath from "./Pages/CodePath";
 import ProblemPage from "./Pages/CodePath/ProblemPage";
+import CreateProblemPage from "./Pages/CodePath/CreateProblemPage";
 import NotFoundPage from "./Pages/NoPage";
 
 function App() {
@@ -19,6 +20,10 @@ function App() {
         <Route path="auth" element={<Auth />} />
         <Route path="codepath" element={<CodePath />} />
         <Route path="/codepath/problem/:pageId" element={<ProblemPage />} />
+        <Route
+          path="/codepath/create-problem"
+          element={<CreateProblemPage />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

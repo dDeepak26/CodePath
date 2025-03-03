@@ -19,11 +19,11 @@
     "@uiw/codemirror-extensions-langs": "^4.23.9",
     "@uiw/codemirror-themes-all": "^4.23.9",
     "@uiw/react-codemirror": "^4.23.9",
-    "chai": "^5.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "firebase": "^11.2.0",
     "firestore": "^1.1.6",
+    "formik": "^2.4.6",
     "lucide": "^0.460.0",
     "lucide-react": "^0.460.0",
     "react": "^18.3.1",
@@ -31,12 +31,13 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.28.0",
     "react-split": "^2.0.14",
+    "react-toastify": "^11.0.5",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@types/chai": "^5.0.1",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
