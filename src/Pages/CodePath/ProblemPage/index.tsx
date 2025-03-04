@@ -30,6 +30,7 @@ const ProblemPage = () => {
     (problem) => problem.pageId === pageId
   );
   console.log(currentProblemData);
+  console.log(currentProblemData?.handlerFunction);
 
   if (!currentProblemData) {
     return (

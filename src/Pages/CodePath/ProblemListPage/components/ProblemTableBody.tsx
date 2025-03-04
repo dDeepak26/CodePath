@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import Modal from "./Modal";
 import { CircleCheckBig, Youtube } from "lucide-react";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
+import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 
 const ProblemTable = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +25,8 @@ const ProblemTable = () => {
     ?.slice()
     .sort((a, b) => a.order - b.order);
 
+  const userData = useGetUserDataOnProblem();
+
   return (
     <tbody className="text-gray-900">
       {problems.map((doc, id) => {
@@ -41,9 +44,11 @@ const ProblemTable = () => {
           >
             {/* CircleCheckBig Icon */}
             <th className="px-6 py-4 font-medium whitespace-nowrap text-green-500">
-              <div className="flex justify-center items-center">
-                <CircleCheckBig fontSize={18} width={18} />
-              </div>
+              {userData.solvedProblem.includes(doc.pageId) && (
+                <div className="flex justify-center items-center">
+                  <CircleCheckBig fontSize={18} width={18} />
+                </div>
+              )}
             </th>
 
             {/* Problem Title */}

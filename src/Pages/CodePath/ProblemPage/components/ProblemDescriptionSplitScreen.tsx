@@ -1,4 +1,5 @@
 import { Problem } from "@/Data/problems";
+import useGetUserDataOnProblem from "@/hooks/useGetUserDataonProblem";
 import { CircleCheckBig, Star, ThumbsDown, ThumbsUp } from "lucide-react";
 
 const ProblemDescriptionSplitScreen = ({
@@ -6,6 +7,8 @@ const ProblemDescriptionSplitScreen = ({
 }: {
   currentProblemData: Problem;
 }) => {
+  const userData = useGetUserDataOnProblem();
+
   const difficultyColor =
     currentProblemData?.difficulty === "Easy"
       ? "text-green-600 bg-green-100"
@@ -33,20 +36,13 @@ const ProblemDescriptionSplitScreen = ({
               >
                 {currentProblemData?.difficulty}
               </div>
-              <div className="rounded p-[3px] ml-4 text-lg text-green-600">
-                <CircleCheckBig />
-              </div>
-              <div className="flex items-center cursor-pointer hover:bg-gray-300 space-x-1 rounded p-[3px] ml-4 text-lg text-gray-700">
-                <ThumbsUp />
-                <span className="text-xs">120</span>
-              </div>
-              <div className="flex items-center cursor-pointer hover:bg-gray-300 space-x-1 rounded p-[3px] ml-4 text-lg text-gray-700">
-                <ThumbsDown />
-                <span className="text-xs">2</span>
-              </div>
-              <div className="cursor-pointer hover:bg-gray-300 rounded p-[3px] ml-4 text-xl text-gray-700">
-                <Star />
-              </div>
+              {userData?.solvedProblem?.includes(
+                currentProblemData?.pageId
+              ) && (
+                <div className="rounded p-[3px] ml-4 text-lg text-green-600">
+                  <CircleCheckBig />
+                </div>
+              )}
             </div>
 
             {/* Problem Statement(paragraphs) */}
