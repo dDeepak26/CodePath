@@ -1,8 +1,8 @@
 import { useUser } from "@clerk/clerk-react";
-import { adminEmails } from "../../../../../adminEmails";
 
 const ProblemTableHead = () => {
   const { user } = useUser();
+  const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
   return (
     <thead className="text-sm text-gray-800 uppercase border-b border-gray-600 shadow-md ">
       <tr>

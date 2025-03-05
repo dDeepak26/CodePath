@@ -5,10 +5,14 @@ import Modal from "./Modal";
 import { CircleCheckBig, Edit, Youtube } from "lucide-react";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
+import { useUser } from "@clerk/clerk-react";
 
 const ProblemTable = () => {
   const dispatch = useAppDispatch();
   const { isOpen, videoUrl } = useAppSelector((state) => state.modal);
+  const { user } = useUser();
+  const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
+  console.log(adminEmails);
 
   const handleYoutubeClick = (videoId: any) => {
     if (videoId) {
@@ -81,14 +85,16 @@ const ProblemTable = () => {
               )}
             </td>
 
-            <td className="px-6 py-4">
-              <Link
-                className="flex justify-center items-center cursor-pointer hover:text-yellow-500"
-                to={`/codepath/edit-problem/${doc?.pageId}`}
-              >
-                <Edit fontSize={18} />
-              </Link>
-            </td>
+            {adminEmails.includes(user?.primaryEmailAddress?.emailAddress) && (
+              <td className="px-6 py-4">
+                <Link
+                  className="flex justify-center items-center cursor-pointer hover:text-yellow-500"
+                  to={`/codepath/edit-problem/${doc?.pageId}`}
+                >
+                  <Edit fontSize={18} />
+                </Link>
+              </td>
+            )}
           </tr>
         );
       })}

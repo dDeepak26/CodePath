@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/hooks/hooks";
 import { useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
-import { adminEmails } from "../../../../adminEmails";
-
 interface CodePathNavBarProps {
   togglePage: () => void;
 }
 
 const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
   const { user } = useUser();
+  const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
 
   // Get currentPage state from Redux
   const currentPage = useAppSelector((state) => state.page.currentPage);
