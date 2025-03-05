@@ -7,6 +7,7 @@ import ProblemPage from "./Pages/CodePath/ProblemPage";
 import CreateProblemPage from "./Pages/CodePath/CreateProblemPage";
 import NotFoundPage from "./Pages/NoPage";
 import { ToastContainer } from "react-toastify";
+import UpdateProblemPage from "./Pages/CodePath/UpdateProblemPage";
 
 function App() {
   const { isSignedIn } = useUser();
@@ -26,6 +27,10 @@ function App() {
           <Route
             path="/codepath/create-problem"
             element={<CreateProblemPage />}
+          />
+          <Route
+            path="/codepath/edit-problem/:pageId"
+            element={<UpdateProblemPage />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

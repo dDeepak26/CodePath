@@ -1,27 +1,44 @@
-import React from "react";
-import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
-import { Problem } from "@/Data/problems";
+import useProblemDataFB from "@/hooks/useProblemDataFB";
+import { useNavigate, useParams } from "react-router-dom";
+import { Problem } from "../../../Data/problems";
+import { ErrorMessage, Field, FieldArray, Formik } from "formik";
+import { Form } from "formik";
+import CreateProblemNavBar from "../CreateProblemPage/components/CreateProblemNavBar";
+import { ProblemSchema, initialValues } from "../CreateProblemPage/utils/main";
+import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase/firebase";
-import { toast, Bounce } from "react-toastify";
-import useProblemDataFB from "@/hooks/useProblemDataFB";
-import CreateProblemNavBar from "./components/CreateProblemNavBar";
-import { initialValues, ProblemSchema } from "./utils/main";
 
-const ProblemForm: React.FC = () => {
-  // to get the problem from firebase
+const UpdateProblemPage = () => {
+  const navigate = useNavigate();
+  const { pageId } = useParams();
   const problemData = useProblemDataFB();
 
-  // to add problem to firebase db
-  const addProblemToFirebase = async (values: Problem) => {
-    console.log(values);
-    const documentId = values.pageId;
-    const problemDataId = problemData.length;
-    const newValue = { ...values, id: problemDataId };
+  const [formInitialValues, setFormInitialValues] =
+    useState<Problem>(initialValues);
+
+  useEffect(() => {
+    // Only attempt to find the problem if problemData is not empty
+    if (problemData && problemData.length > 0) {
+      const currentProblemData = problemData.find(
+        (object) => object.pageId === pageId
+      );
+
+      // If a problem is found, update the initial values
+      if (currentProblemData) {
+        console.log("Found problem data:", currentProblemData);
+        setFormInitialValues(currentProblemData);
+      }
+    }
+  }, [pageId, problemData]);
+
+  // to update the problem data into firebase
+  const updateProblemToFirebase = async (values: Problem) => {
     try {
-      await setDoc(doc(db, "problems", documentId), newValue);
-      toast.success("Problem successfully added to Firebase! 🎉", {
-        position: "bottom-right",
+      await setDoc(doc(db, "problems", pageId || ""), values);
+      toast.success("Problem successfully Updated to Firebase! 🎉", {
+        position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: false,
@@ -41,20 +58,25 @@ const ProblemForm: React.FC = () => {
     <div className="pb-10">
       <CreateProblemNavBar />
       <div className="max-w-4xl mx-auto mt-10 p-6 bg-gray-300 rounded-lg shadow-lg">
-        <h1 className="text-2xl text-center font-bold mb-6">Add New Problem</h1>
+        <h1 className="text-2xl text-center font-bold mb-6">
+          Update {formInitialValues?.title} Problem
+        </h1>
 
         <Formik
-          initialValues={initialValues}
+          key={formInitialValues.pageId || "new"}
+          enableReinitialize
+          initialValues={formInitialValues}
           validationSchema={ProblemSchema}
           onSubmit={(values, actions) => {
             // Handle the form submission
+            console.log("submitted data:");
             console.log(values);
 
-            addProblemToFirebase(values);
+            updateProblemToFirebase(values);
             setTimeout(() => {
               actions.setSubmitting(false);
             }, 5000);
-            actions.resetForm();
+            navigate("/codepath");
           }}
         >
           {({ values, errors, touched, isSubmitting }) => (
@@ -423,4 +445,4 @@ const ProblemForm: React.FC = () => {
   );
 };
 
-export default ProblemForm;
+export default UpdateProblemPage;

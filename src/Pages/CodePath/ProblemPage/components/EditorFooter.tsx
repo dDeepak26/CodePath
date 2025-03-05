@@ -4,7 +4,6 @@ import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 import { db } from "@/utils/firebase/firebase";
 import { useUser } from "@clerk/clerk-react";
 import { doc, setDoc } from "firebase/firestore";
-import { ChevronUp } from "lucide-react";
 import { Bounce, toast } from "react-toastify";
 
 const EditorFooter = ({
@@ -20,10 +19,6 @@ const EditorFooter = ({
   // handleRun function to check the user function passes the test cases and display the toast msg
   const handleRun = () => {
     try {
-      // const userFunctionCode = new Function(`return (${userFunction})`)();
-      // const handlerFunction = new Function(
-      //   `return (${currentProblemData?.handlerFunction})`
-      // )();
       const userFunctionCode = new Function(`return ${userFunction}`)();
       const handlerFunction = new Function(
         `return ${currentProblemData?.handlerFunction}`
@@ -91,15 +86,13 @@ const EditorFooter = ({
           "users",
           user?.primaryEmailAddress?.emailAddress || ""
         );
-        setDoc(docRef, [
-          {
-            ...userData,
-            solvedProblem: [
-              ...(userData.solvedProblem || []),
-              currentProblemData?.pageId,
-            ],
-          },
-        ]);
+        setDoc(docRef, {
+          ...userData,
+          solvedProblem: [
+            ...(userData.solvedProblem || []),
+            currentProblemData?.pageId,
+          ],
+        });
         toast.success("All Test Cases Passed Successfully 🎉 and Submitted", {
           position: "top-center",
           autoClose: 3000,

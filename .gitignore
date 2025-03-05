@@ -11,6 +11,8 @@ lerna-debug.log*
 .env
 .env.
 
+adminEmails.ts
+
 node_modules
 dist
 dist-ssr

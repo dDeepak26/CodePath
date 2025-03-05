@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { closeModal, openModal } from "@/utils/redux/modalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import Modal from "./Modal";
-import { CircleCheckBig, Youtube } from "lucide-react";
+import { CircleCheckBig, Edit, Youtube } from "lucide-react";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 
@@ -79,6 +79,15 @@ const ProblemTable = () => {
               ) : (
                 <p>Coming soon...</p>
               )}
+            </td>
+
+            <td className="px-6 py-4">
+              <Link
+                className="flex justify-center items-center cursor-pointer hover:text-yellow-500"
+                to={`/codepath/edit-problem/${doc?.pageId}`}
+              >
+                <Edit fontSize={18} />
+              </Link>
             </td>
           </tr>
         );

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/hooks/hooks";
 import { useUser } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
+import { adminEmails } from "../../../../adminEmails";
 
 interface CodePathNavBarProps {
   togglePage: () => void;
@@ -28,6 +30,13 @@ const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
         </div>
         {/* navigation buttons */}
         <div className="flex items-center space-x-3">
+          {adminEmails.includes(
+            user?.primaryEmailAddress?.emailAddress || ""
+          ) && (
+            <Button>
+              <Link to={"/codepath/create-problem"}>Create Problem</Link>
+            </Button>
+          )}
           <Button variant={"default"} onClick={togglePage}>
             {buttonText === "Profile" ? (
               <>
