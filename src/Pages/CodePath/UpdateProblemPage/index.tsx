@@ -68,10 +68,6 @@ const UpdateProblemPage = () => {
           initialValues={formInitialValues}
           validationSchema={ProblemSchema}
           onSubmit={(values, actions) => {
-            // Handle the form submission
-            console.log("submitted data:");
-            console.log(values);
-
             updateProblemToFirebase(values);
             setTimeout(() => {
               actions.setSubmitting(false);
@@ -79,7 +75,7 @@ const UpdateProblemPage = () => {
             navigate("/codepath");
           }}
         >
-          {({ values, errors, touched, isSubmitting }) => (
+          {({ values, isSubmitting }) => (
             <Form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -233,7 +229,7 @@ const UpdateProblemPage = () => {
                   {({ remove, push }) => (
                     <div className="space-y-4">
                       {values.examples.length > 0 &&
-                        values.examples.map((example, index) => (
+                        values.examples.map((_, index) => (
                           <div
                             key={index}
                             className="border p-4 rounded-md bg-gray-200"

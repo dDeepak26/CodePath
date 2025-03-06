@@ -5,7 +5,6 @@ import { db } from "@/utils/firebase/firebase";
 
 export function useCreateUserInFirestore() {
   const { user, isSignedIn } = useUser();
-  console.log(user);
 
   const createUserInFirestore = async () => {
     try {

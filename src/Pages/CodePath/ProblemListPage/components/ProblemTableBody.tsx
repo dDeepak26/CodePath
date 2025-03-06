@@ -12,7 +12,6 @@ const ProblemTable = () => {
   const { isOpen, videoUrl } = useAppSelector((state) => state.modal);
   const { user } = useUser();
   const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
-  console.log(adminEmails);
 
   const handleYoutubeClick = (videoId: any) => {
     if (videoId) {

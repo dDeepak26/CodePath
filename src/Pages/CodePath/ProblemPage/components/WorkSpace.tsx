@@ -15,7 +15,10 @@ const WorkSpace = ({ currentProblemData }: { currentProblemData: Problem }) => {
         <ProblemDescriptionSplitScreen
           currentProblemData={currentProblemData}
         />
-        <Playground currentProblemData={currentProblemData} />
+        <Playground
+          currentProblemData={currentProblemData}
+          setSuccess={setSuccess}
+        />
       </Split>
       {success && (
         <Confetti

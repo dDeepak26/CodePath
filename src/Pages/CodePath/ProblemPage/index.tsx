@@ -29,8 +29,6 @@ const ProblemPage = () => {
   const currentProblemData = problemsData.find(
     (problem) => problem.pageId === pageId
   );
-  console.log(currentProblemData);
-  console.log(currentProblemData?.handlerFunction);
 
   if (!currentProblemData) {
     return (
@@ -42,7 +40,7 @@ const ProblemPage = () => {
 
   return (
     <div>
-      <ProblemPageNavBar />
+      <ProblemPageNavBar currentProblemData={currentProblemData} />
       {/* split screen component for problem description and code editor */}
       <WorkSpace currentProblemData={currentProblemData} />
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { togglePage } from "../../utils/redux/pageSlice";

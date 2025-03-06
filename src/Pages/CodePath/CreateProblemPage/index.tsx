@@ -14,7 +14,6 @@ const ProblemForm: React.FC = () => {
 
   // to add problem to firebase db
   const addProblemToFirebase = async (values: Problem) => {
-    console.log(values);
     const documentId = values.pageId;
     const problemDataId = problemData.length;
     const newValue = { ...values, id: problemDataId };
@@ -47,9 +46,6 @@ const ProblemForm: React.FC = () => {
           initialValues={initialValues}
           validationSchema={ProblemSchema}
           onSubmit={(values, actions) => {
-            // Handle the form submission
-            console.log(values);
-
             addProblemToFirebase(values);
             setTimeout(() => {
               actions.setSubmitting(false);
@@ -57,7 +53,7 @@ const ProblemForm: React.FC = () => {
             actions.resetForm();
           }}
         >
-          {({ values, errors, touched, isSubmitting }) => (
+          {({ values, isSubmitting }) => (
             <Form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -211,7 +207,7 @@ const ProblemForm: React.FC = () => {
                   {({ remove, push }) => (
                     <div className="space-y-4">
                       {values.examples.length > 0 &&
-                        values.examples.map((example, index) => (
+                        values.examples.map((_, index) => (
                           <div
                             key={index}
                             className="border p-4 rounded-md bg-gray-200"

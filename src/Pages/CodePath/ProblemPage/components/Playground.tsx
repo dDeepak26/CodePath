@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import * as themes from "@uiw/codemirror-themes-all";
@@ -9,8 +9,10 @@ import EditorFooter from "./EditorFooter";
 
 const Playground = ({
   currentProblemData,
+  setSuccess,
 }: {
   currentProblemData: Problem;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
   const [userFunction, setUserFunction] = useState<string>("");
@@ -85,6 +87,7 @@ const Playground = ({
       <EditorFooter
         userFunction={userFunction}
         currentProblemData={currentProblemData}
+        setSuccess={setSuccess}
       />
     </div>
   );

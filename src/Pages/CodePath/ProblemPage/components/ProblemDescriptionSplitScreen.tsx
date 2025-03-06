@@ -1,6 +1,6 @@
+import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 import { Problem } from "@/types/problems";
-import useGetUserDataOnProblem from "@/hooks/useGetUserDataonProblem";
-import { CircleCheckBig, Star, ThumbsDown, ThumbsUp } from "lucide-react";
+import { CircleCheckBig } from "lucide-react";
 
 const ProblemDescriptionSplitScreen = ({
   currentProblemData,

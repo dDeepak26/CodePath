@@ -7,7 +7,7 @@ export type ExampleType = {
 };
 
 export type Problem = {
-  id: number;
+  id: number | string;
   pageId: string;
   title: string;
   difficulty: string;

@@ -9,9 +9,11 @@ import { Bounce, toast } from "react-toastify";
 const EditorFooter = ({
   userFunction,
   currentProblemData,
+  setSuccess,
 }: {
   userFunction: string;
   currentProblemData: Problem;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { user } = useUser();
   const userData = useGetUserDataOnProblem();
@@ -93,6 +95,10 @@ const EditorFooter = ({
             currentProblemData?.pageId,
           ],
         });
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 4000);
         toast.success("All Test Cases Passed Successfully 🎉 and Submitted", {
           position: "top-center",
           autoClose: 3000,
