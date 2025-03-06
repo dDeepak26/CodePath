@@ -1,4 +1,4 @@
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import { db } from "@/utils/firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";

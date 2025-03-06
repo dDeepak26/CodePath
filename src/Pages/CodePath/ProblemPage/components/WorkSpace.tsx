@@ -4,7 +4,7 @@ import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import ProblemDescriptionSplitScreen from "./ProblemDescriptionSplitScreen";
 import Playground from "./Playground";
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 
 const WorkSpace = ({ currentProblemData }: { currentProblemData: Problem }) => {
   const [success, setSuccess] = useState<boolean>(false);

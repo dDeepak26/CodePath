@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "@/Data/types/user"; // Make sure this type is correctly defined
+import { User } from "@/types/user"; // Make sure this type is correctly defined
 
 // Define initial state with proper types
 const initialState: User = {

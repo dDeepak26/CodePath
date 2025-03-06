@@ -1,10 +1,10 @@
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import { useNavigate, useParams } from "react-router-dom";
-import { Problem } from "../../../Data/problems";
+import { Problem } from "../../../types/problems";
 import { ErrorMessage, Field, FieldArray, Formik } from "formik";
 import { Form } from "formik";
 import CreateProblemNavBar from "../CreateProblemPage/components/CreateProblemNavBar";
-import { ProblemSchema, initialValues } from "../CreateProblemPage/utils/main";
+import { ProblemSchema, initialValues } from "../../../types/main";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 import { doc, setDoc } from "firebase/firestore";

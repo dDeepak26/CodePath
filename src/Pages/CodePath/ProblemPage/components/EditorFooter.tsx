@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 import { db } from "@/utils/firebase/firebase";
 import { useUser } from "@clerk/clerk-react";

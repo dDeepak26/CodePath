@@ -1,4 +1,4 @@
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface problemState {

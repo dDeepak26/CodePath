@@ -1,4 +1,4 @@
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataonProblem";
 import { CircleCheckBig, Star, ThumbsDown, ThumbsUp } from "lucide-react";
 

@@ -1,4 +1,4 @@
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import * as Yup from "yup";
 
 // Validation schema

@@ -4,7 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
 import { useUser } from "@clerk/clerk-react";
 import { addUsers } from "@/utils/redux/userSlice";
-import { User } from "@/Data/types/user";
+import { User } from "@/types/user";
 import { useEffect } from "react";
 
 const useGetUserDataOnProblem = () => {

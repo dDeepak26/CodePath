@@ -3,7 +3,7 @@ import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import * as themes from "@uiw/codemirror-themes-all";
 import { langs } from "@uiw/codemirror-extensions-langs";
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import PlaygroundNavBar from "./PlaygroundNavBar";
 import EditorFooter from "./EditorFooter";
 

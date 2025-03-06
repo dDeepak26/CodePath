@@ -1,12 +1,12 @@
 import React from "react";
 import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
-import { Problem } from "@/Data/problems";
+import { Problem } from "@/types/problems";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/utils/firebase/firebase";
 import { toast, Bounce } from "react-toastify";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import CreateProblemNavBar from "./components/CreateProblemNavBar";
-import { initialValues, ProblemSchema } from "./utils/main";
+import { initialValues, ProblemSchema } from "../../../types/main";
 
 const ProblemForm: React.FC = () => {
   // to get the problem from firebase
