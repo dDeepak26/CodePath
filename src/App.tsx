@@ -1,5 +1,4 @@
-import { useUser } from "@clerk/clerk-react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Auth from "./Pages/Auth";
 import Home from "./Pages/Home";
 import CodePath from "./Pages/CodePath";
@@ -10,7 +9,6 @@ import { ToastContainer } from "react-toastify";
 import UpdateProblemPage from "./Pages/CodePath/UpdateProblemPage";
 
 function App() {
-  const { isSignedIn } = useUser();
   return (
     <>
       <ToastContainer />
@@ -19,7 +17,7 @@ function App() {
           <Route
             index
             path="/"
-            element={isSignedIn ? <Navigate to="codepath" /> : <Home />}
+            element={<Home />}
           />
           <Route path="auth" element={<Auth />} />
           <Route path="codepath" element={<CodePath />} />

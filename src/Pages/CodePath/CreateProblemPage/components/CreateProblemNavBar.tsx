@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 
 const CreateProblemNavBar: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const CreateProblemNavBar: React.FC = () => {
         {/* home page codepath Navigation Buttons */}
         <div className="flex items-center space-x-3">
           <Button>
+            <Home />  
             <Link to={"/codepath"}>Home</Link>
           </Button>
         </div>

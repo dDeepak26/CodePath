@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Mail } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
+import { Home, Mail } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -17,6 +18,8 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const {user} = useUser();
 
   return (
     <div className="p-5 border-b border-gray-300 shadow-sm bg-white sticky top-0 z-10">
@@ -39,11 +42,18 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
           <Button variant="link" onClick={onDeveloperClick}>
             Developer
           </Button>
-          <Link to="/auth">
+          {!user ? (<Link to="/auth">
             <Button>
               <Mail className="h-4 w-4" /> Sign In
             </Button>
-          </Link>
+          </Link>) : (
+            <Link to="/codepath">
+              <Button>
+                <Home />
+                Home
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
