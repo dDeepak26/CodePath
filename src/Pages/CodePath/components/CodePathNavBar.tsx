@@ -55,7 +55,7 @@ const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
           </Button>
           {/* Home page button */}
           <Button>
-            <Home />  
+            <Home />
             <Link to={"/"}>Home</Link>
           </Button>
         </div>

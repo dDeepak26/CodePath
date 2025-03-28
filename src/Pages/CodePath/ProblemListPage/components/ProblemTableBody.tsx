@@ -29,6 +29,7 @@ const ProblemTable = () => {
     .sort((a, b) => a.order - b.order);
 
   const userData = useGetUserDataOnProblem();
+  console.log(userData?.solvedProblem.length);
 
   return (
     <tbody className="text-gray-900">

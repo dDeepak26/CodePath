@@ -34,6 +34,7 @@
     "react-split": "^2.0.14",
     "react-toastify": "^11.0.5",
     "react-use": "^17.6.0",
+    "recharts": "^2.15.1",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "yup": "^1.6.1"

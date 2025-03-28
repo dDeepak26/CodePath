@@ -1,25 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { useUser } from "@clerk/clerk-react";
-import { Home, Mail } from "lucide-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
+import { Mail } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
 interface HomePageNavBarProps {
-  onExploreClick: () => void;
-  onProductClick: () => void;
-  onDeveloperClick: () => void;
+  onFeatureClick: () => void;
+  onExplainClick: () => void;
 }
 
 const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
-  onExploreClick,
-  onProductClick,
-  onDeveloperClick,
+  onFeatureClick,
+  onExplainClick,
 }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const {user} = useUser();
+  const { user } = useUser();
 
   return (
     <div className="p-5 border-b border-gray-300 shadow-sm bg-white sticky top-0 z-10">
@@ -33,24 +31,23 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
         </div>
         {/* navigation buttons */}
         <div className="flex items-center space-x-3">
-          <Button variant="link" onClick={onExploreClick}>
-            Explore
+          <Button variant="link" onClick={onFeatureClick}>
+            Feature
           </Button>
-          <Button variant="link" onClick={onProductClick}>
-            Product
+          <Button variant="link" onClick={onExplainClick}>
+            How It Works
           </Button>
-          <Button variant="link" onClick={onDeveloperClick}>
-            Developer
-          </Button>
-          {!user ? (<Link to="/auth">
-            <Button>
-              <Mail className="h-4 w-4" /> Sign In
-            </Button>
-          </Link>) : (
+          {!user ? (
+            <Link to="/auth">
+              <Button>
+                <Mail className="h-4 w-4" /> Sign In
+              </Button>
+            </Link>
+          ) : (
             <Link to="/codepath">
               <Button>
-                <Home />
-                Home
+                Problem
+                <UserButton />
               </Button>
             </Link>
           )}
