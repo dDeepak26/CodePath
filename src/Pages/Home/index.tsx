@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
+      {!user && <section className="py-20 bg-primary text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">
             Ready to Start Your Coding Journey?
@@ -123,7 +123,7 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </section>
+      </section>}
 
       {/* Footer */}
       <footer className="py-3 bg-gray-200">
