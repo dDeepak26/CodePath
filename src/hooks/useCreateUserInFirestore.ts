@@ -1,25 +1,25 @@
 import { useEffect } from "react";
-import { useUser } from "@clerk/clerk-react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "@/utils/firebase/firebase";
+import { auth, db } from "@/utils/firebase/firebase";
 
 export function useCreateUserInFirestore() {
-  const { user, isSignedIn } = useUser();
+  // const { user, isSignedIn } = useUser();
+  const user = auth.currentUser;
 
   const createUserInFirestore = async () => {
     try {
       const userRef = doc(
         db,
         "users",
-        user?.primaryEmailAddress?.emailAddress || ""
+        user?.email || ""
       );
 
       const userSnap = await getDoc(userRef);
 
       if (!userSnap.exists()) {
         await setDoc(userRef, {
-          username: user?.fullName,
-          createdAt: user?.createdAt?.toString(),
+          username: user?.displayName,
+          createdAt: user?.metadata?.creationTime?.toString(),
           solvedProblem: [],
         });
         console.log("User created in Firestore!");
@@ -30,7 +30,7 @@ export function useCreateUserInFirestore() {
   };
 
   useEffect(() => {
-    if (!isSignedIn || !user?.id) return;
+    if (!user || !user?.uid) return;
     createUserInFirestore();
-  }, [user, isSignedIn]);
+  }, [user]);
 }

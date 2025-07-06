@@ -1,14 +1,13 @@
-import { db } from "@/utils/firebase/firebase";
+import { auth, db } from "@/utils/firebase/firebase";
 import { RootState } from "@/utils/redux/store";
 import { doc, getDoc } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
-import { useUser } from "@clerk/clerk-react";
 import { addUsers } from "@/utils/redux/userSlice";
 import { User } from "@/types/user";
 import { useEffect } from "react";
 
 const useGetUserDataOnProblem = () => {
-  const { user } = useUser();
+  const user = auth.currentUser;
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.users);
 
@@ -16,7 +15,7 @@ const useGetUserDataOnProblem = () => {
     if (!user) return;
 
     try {
-      const userEmail = user.primaryEmailAddress?.emailAddress;
+      const userEmail = user?.email;
       if (!userEmail) return;
 
       const userRef = doc(db, "users", userEmail);

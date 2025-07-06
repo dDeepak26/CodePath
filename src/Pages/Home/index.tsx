@@ -1,4 +1,3 @@
-import { useUser } from "@clerk/clerk-react";
 import { HomePageNavBar } from "./components/HomePageNavBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Search, ChartColumnIncreasing } from "lucide-react";
@@ -6,7 +5,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const { user } = useUser();
   const featureRef = useRef<HTMLDivElement>(null);
   const explainRef = useRef<HTMLDivElement>(null);
 
@@ -32,7 +30,7 @@ export default function Home() {
             challenges and expert-led courses.
           </p>
           <div className="flex justify-center gap-4">
-            <Link to={user ? "/codepath" : "/auth"}>
+            <Link to={"/auth"}>
               <Button size="lg">
                 Start Coding Now
                 <ArrowRight className="ml-2 h-5 w-5" />

@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { AlignJustify, ArrowLeft, ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Timer from "./Timer";
-import { UserButton } from "@clerk/clerk-react";
 import { Problem } from "@/types/problems";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 
@@ -79,7 +78,6 @@ const ProblemPageNavBar = ({
         {/* Timer & User Button */}
         <div className="flex items-center space-x-3">
           <Timer />
-          <UserButton />
         </div>
       </div>
     </nav>

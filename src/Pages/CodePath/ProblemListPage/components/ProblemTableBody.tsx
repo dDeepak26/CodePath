@@ -5,12 +5,13 @@ import Modal from "./Modal";
 import { CircleCheckBig, Edit, Youtube } from "lucide-react";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
-import { useUser } from "@clerk/clerk-react";
+import { auth } from "@/utils/firebase/firebase";
 
 const ProblemTable = () => {
   const dispatch = useAppDispatch();
   const { isOpen, videoUrl } = useAppSelector((state) => state.modal);
-  const { user } = useUser();
+  // const { user } = useUser();
+  const user = auth.currentUser;
   const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
 
   const handleYoutubeClick = (videoId: any) => {
@@ -38,8 +39,8 @@ const ProblemTable = () => {
           doc?.difficulty === "Easy"
             ? "text-green-600"
             : doc?.difficulty === "Medium"
-            ? "text-yellow-600"
-            : "text-red-600";
+              ? "text-yellow-600"
+              : "text-red-600";
 
         return (
           <tr
@@ -85,7 +86,7 @@ const ProblemTable = () => {
               )}
             </td>
 
-            {adminEmails.includes(user?.primaryEmailAddress?.emailAddress) && (
+            {adminEmails.includes(user?.email) && (
               <td className="px-6 py-4">
                 <Link
                   className="flex justify-center items-center cursor-pointer hover:text-yellow-500"

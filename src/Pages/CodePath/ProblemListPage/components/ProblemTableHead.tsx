@@ -1,7 +1,7 @@
-import { useUser } from "@clerk/clerk-react";
+import { auth } from "@/utils/firebase/firebase";
 
 const ProblemTableHead = () => {
-  const { user } = useUser();
+  const user = auth.currentUser;
   const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
   return (
     <thead className="text-sm text-gray-800 uppercase border-b border-gray-600 shadow-md ">
@@ -23,12 +23,12 @@ const ProblemTableHead = () => {
           Solution
         </th>
         {adminEmails.includes(
-          user?.primaryEmailAddress?.emailAddress || ""
+          user?.email || ""
         ) && (
-          <th scope="col" className="px-6 py-3 w-0 font-medium">
-            Edit
-          </th>
-        )}
+            <th scope="col" className="px-6 py-3 w-0 font-medium">
+              Edit
+            </th>
+          )}
       </tr>
     </thead>
   );

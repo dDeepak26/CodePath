@@ -1,16 +1,16 @@
 import { useParams } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react";
 import LoadingSkeleton from "@/components/LoadingSkeleton";
 import ProblemPageNavBar from "./components/ProblemPageNavBar";
 import WorkSpace from "./components/WorkSpace";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
+import { auth } from "@/utils/firebase/firebase";
 
 const ProblemPage = () => {
-  const { isLoaded } = useUser();
+  const user = auth.currentUser;
   const { pageId } = useParams();
 
   // loading state
-  if (!isLoaded) {
+  if (!user) {
     return <LoadingSkeleton />;
   }
 

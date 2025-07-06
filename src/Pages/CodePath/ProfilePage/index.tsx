@@ -1,14 +1,26 @@
-import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
 import { LogOut, CheckCircle2 } from "lucide-react";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
 import useProblemDataFB from "@/hooks/useProblemDataFB";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import { auth } from "@/utils/firebase/firebase";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
-  const { user } = useUser();
+  const user = auth.currentUser;
+  const navigate = useNavigate();
   const { solvedProblem } = useGetUserDataOnProblem();
   const problemData = useProblemDataFB();
+
+  const handleSignOut = async () => {
+    signOut(auth)
+      .then(() => {
+        toast.success(`Signed Out`);
+        navigate("/");
+      })
+  }
 
   const data = [
     {
@@ -35,7 +47,7 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center space-y-6">
             <div className="relative">
               <img
-                src={user?.imageUrl}
+                src={user?.photoURL || ""}
                 alt="user profile"
                 className="w-48 h-48 rounded-full border-4 border-emerald-500 shadow-lg transform transition-transform duration-300 hover:scale-105"
               />
@@ -46,21 +58,20 @@ const ProfilePage = () => {
 
             <div className="text-center">
               <h1 className="text-3xl font-bold text-gray-800 mb-2">
-                {user?.fullName}
+                {user?.displayName}
               </h1>
               <p className="text-gray-600 mb-6">
-                {user?.primaryEmailAddress?.emailAddress}
+                {user?.email}
               </p>
 
-              <SignOutButton>
-                <Button
-                  variant="destructive"
-                  className="w-full flex items-center justify-center space-x-2 bg-red-500 hover:bg-red-600 transition-colors"
-                >
-                  <LogOut size={20} />
-                  <span>Sign Out</span>
-                </Button>
-              </SignOutButton>
+              <Button
+                variant="destructive"
+                onClick={handleSignOut}
+                className="w-full flex items-center justify-center space-x-2 bg-red-500 hover:bg-red-600 transition-colors"
+              >
+                <LogOut size={20} />
+                <span>Sign Out</span>
+              </Button>
             </div>
           </div>
 

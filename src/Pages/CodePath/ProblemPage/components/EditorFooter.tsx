@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Problem } from "@/types/problems";
 import useGetUserDataOnProblem from "@/hooks/useGetUserDataOnProblem";
-import { db } from "@/utils/firebase/firebase";
-import { useUser } from "@clerk/clerk-react";
+import { auth, db } from "@/utils/firebase/firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { Bounce, toast } from "react-toastify";
 
@@ -15,7 +14,7 @@ const EditorFooter = ({
   currentProblemData: Problem;
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { user } = useUser();
+  const user = auth.currentUser;
   const userData = useGetUserDataOnProblem();
 
   // handleRun function to check the user function passes the test cases and display the toast msg
@@ -86,7 +85,7 @@ const EditorFooter = ({
         const docRef = doc(
           db,
           "users",
-          user?.primaryEmailAddress?.emailAddress || ""
+          user?.email || ""
         );
         setDoc(docRef, {
           ...userData,

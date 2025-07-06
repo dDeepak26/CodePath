@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { UserButton, useUser } from "@clerk/clerk-react";
+import { auth } from "@/utils/firebase/firebase";
 import { Mail } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface HomePageNavBarProps {
   onFeatureClick: () => void;
@@ -17,7 +17,12 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const { user } = useUser();
+  const user = auth.currentUser;
+  const navigate = useNavigate();
+
+  if (user) {
+    navigate("/codepath");
+  }
 
   return (
     <div className="p-5 border-b border-gray-300 shadow-sm bg-white sticky top-0 z-10">
@@ -37,20 +42,11 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
           <Button variant="link" onClick={onExplainClick}>
             How It Works
           </Button>
-          {!user ? (
-            <Link to="/auth">
-              <Button>
-                <Mail className="h-4 w-4" /> Sign In
-              </Button>
-            </Link>
-          ) : (
-            <Link to="/codepath">
-              <Button>
-                Problem
-                <UserButton />
-              </Button>
-            </Link>
-          )}
+          <Link to="/auth">
+            <Button>
+              <Mail className="h-4 w-4" /> Sign In
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

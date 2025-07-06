@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useAppSelector } from "@/hooks/hooks";
-import { useUser } from "@clerk/clerk-react";
-import { Home } from "lucide-react";
+import { auth } from "@/utils/firebase/firebase";
 import { Link } from "react-router-dom";
 interface CodePathNavBarProps {
   togglePage: () => void;
 }
 
 const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
-  const { user } = useUser();
+  const user = auth.currentUser;
   const adminEmails = import.meta.env.VITE_ADMIN_EMAILS?.split(",") || [];
 
   // Get currentPage state from Redux
@@ -32,18 +31,18 @@ const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
         <div className="flex items-center space-x-3">
           {/* create button */}
           {adminEmails.includes(
-            user?.primaryEmailAddress?.emailAddress || ""
+            user?.email || ""
           ) && (
-            <Button>
-              <Link to={"/codepath/create-problem"}>Create Problem</Link>
-            </Button>
-          )}
+              <Button>
+                <Link to={"/codepath/create-problem"}>Create Problem</Link>
+              </Button>
+            )}
           {/* profile button */}
           <Button variant={"default"} onClick={togglePage}>
             {buttonText === "Profile" ? (
               <>
                 <img
-                  src={user?.imageUrl}
+                  src={user?.photoURL || ""}
                   alt="No Profile Image"
                   className="h-6 w-6 rounded-lg border-white mr-2"
                 />
@@ -52,11 +51,6 @@ const CodePathNavBar: React.FC<CodePathNavBarProps> = ({ togglePage }) => {
             ) : (
               buttonText
             )}
-          </Button>
-          {/* Home page button */}
-          <Button>
-            <Home />
-            <Link to={"/"}>Home</Link>
           </Button>
         </div>
       </div>
