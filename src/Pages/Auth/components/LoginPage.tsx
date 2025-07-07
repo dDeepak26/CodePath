@@ -9,6 +9,7 @@ import { auth } from "@/utils/firebase/firebase";
 import profileImage from "@/assets/avatar.png"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
 
 const inputClasses =
   "block w-full rounded-md border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50";
@@ -17,6 +18,12 @@ export function LoginPage() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [isError, setError] = useState<string>("");
+
+  // redirect user to codepath page if he is already logged in
+  const { user } = useAuth();
+  if (user) {
+    navigate("/codepath");
+  }
 
   // create/register user
   const handleRegister = async (values: any, actions: any) => {
@@ -33,7 +40,7 @@ export function LoginPage() {
             console.log(currentUser?.displayName);
             toast.success(`Welcome, ${currentUser?.displayName || "user"}!`);
             setError("");
-            navigate('/auth');
+            navigate('/codepath');
           })
           .catch((error) => {
             console.error("Error in updating the user profile", error);

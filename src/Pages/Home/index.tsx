@@ -1,8 +1,8 @@
+import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { HomePageNavBar } from "./components/HomePageNavBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Search, ChartColumnIncreasing } from "lucide-react";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
 
 export default function Home() {
   const featureRef = useRef<HTMLDivElement>(null);

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { auth } from "@/utils/firebase/firebase";
+import { useAuth } from "@/context/AuthContext";
 import { Mail } from "lucide-react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const HomePageNavBar: React.FC<HomePageNavBarProps> = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const user = auth.currentUser;
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   if (user) {
